@@ -13,17 +13,17 @@ bp = Blueprint('question', __name__, url_prefix = '/question')
 # 특정 주소에 접속할 시 바로 다음 줄에 있는 함수 호출
 @bp.route('/list/')
 def _list() :
+    page = request.args.get('page', type=int, default=1)  # 페이지
     # 작성 일시를 기준으로 역순으로 정렬
     question_list = Question.query.order_by(Question.create_date.desc())
-    return render_template('question/question_list.html', 
-                            question_list=question_list)
+    question_list = question_list.paginate(page=page, per_page=25)
+    return render_template('question/question_list.html', question_list=question_list)
 
 @bp.route('/detail/<int:question_id>/')
 def detail(question_id) :
     form = AnswerForm()
     question = Question.query.get_or_404(question_id)
-    return render_template('question/question_detail.html',
-                            question=question, form = form)
+    return render_template('question/question_detail.html', question=question, form = form)
 
 @bp.route('/create/', methods=('GET', 'POST'))
 def create() :

@@ -10,13 +10,18 @@
     <!-- pybo CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Hello, pybo!</title>
+
+    <!-- jQuery JS -->
+    <script src="{{ url_for('static', filename='jquery-3.7.0.min.js') }}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
 </head>
 
 <body>
-    <!--기본 템플릿 Start -->
+    {% include "navbar.html" %}
+    <!-- 기본 템플릿 Start -->
     {% block content %}
     {% endblock %}
-    <!--기본 템플릿 End -->
+    <!-- 기본 템플릿 End -->
 </body>
-
 </html>
