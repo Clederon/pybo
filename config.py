@@ -6,3 +6,6 @@ BASE_DIR = os.path.dirname(__file__)
 SQLALCHEMY_DATABASE_URI = 'sqlite:///{}'.format(os.path.join(BASE_DIR, 'pybo.db'))
 # SQLAlchemy의 이벤트 처리 옵션
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+## pip install Flask-WTF
+SECRET_KEY = "dev"

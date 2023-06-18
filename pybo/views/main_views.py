@@ -1,4 +1,5 @@
-from flask import Blueprint
+from flask import Blueprint, url_for
+from werkzeug.utils import redirect
 
 ## 블루프린트 객체 생성 : 이름, 모듈명, URL 프리픽스
 # URL 프리픽스 : 특정 파일(main_views.py)에 있는 함수의 애너테이션 URL 앞에 기본으로 붙일 접두어 URL
@@ -12,4 +13,5 @@ def hello_pybo() :
 # 특정 주소에 접속할 시 바로 다음 줄에 있는 함수 호출
 @bp.route('/')
 def index() :
-    return 'Pybo index'
+    ## 이 주소로 리다이렉트 : bp 이름 question의 _list 함수
+    return redirect(url_for('question._list'))
