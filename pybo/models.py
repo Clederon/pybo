@@ -10,6 +10,10 @@ class Question(db.Model) :
     content = db.Column(db.Text(), nullable = False)
     # 질문 작성일시
     create_date = db.Column(db.DateTime(), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete = 'CASCADE'), nullable = False)
+    user = db.relationship('User', backref = db.backref('question_set'))
+
+    modify_date = db.Column(db.DateTime(), nullable = True)
 
 class Answer(db.Model) :
     # 답변 데이터의 고유 번호
@@ -22,3 +26,13 @@ class Answer(db.Model) :
     content = db.Column(db.Text(), nullable = False)
     # 질문 작성일시
     create_date = db.Column(db.DateTime(), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete = 'CASCADE'), nullable = False)
+    user = db.relationship('User', backref = db.backref('answer_set'))
+
+    modify_date = db.Column(db.DateTime(), nullable = True)
+
+class User(db.Model) :
+    id = db.Column(db.Integer, primary_key = True)
+    username = db.Column(db.String(150), unique = True, nullable = False)
+    password = db.Column(db.String(200), nullable = False)
+    email = db.Column(db.String(120), unique = True, nullable = False)
